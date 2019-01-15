@@ -71,3 +71,12 @@ RUN echo 'alias xon="mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.off 
 
 # Change memory limit
 RUN echo 'memory_limit = 2G ' >> /usr/local/etc/php/php.ini
+RUN echo 'max_execution_time = 300' >> /usr/local/etc/php/php.ini
+RUN echo 'zend_extension =  /usr/local/lib/php/extensions/no-debug-non-zts-20131226/ioncube_loader_lin_5.6.so' >> /usr/local/etc/php/php.ini
+
+# Instal ionCube Loader
+RUN mkdir /tmp/ionCubeLoader \
+    && curl https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz | tar xvz \
+    && cd ioncube \
+    && cp ioncube_loader_lin_5.6.so /usr/local/lib/php/extensions/no-debug-non-zts-20131226 \
+    && rm -Rf /tmp/ionCubeLoader
